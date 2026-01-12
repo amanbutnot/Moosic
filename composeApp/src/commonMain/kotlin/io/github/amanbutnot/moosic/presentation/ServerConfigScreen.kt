@@ -34,6 +34,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -65,9 +66,9 @@ fun ServerConfigContent(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var serverUrl by remember { mutableStateOf(appSettings.serverUrl) }
-    var username by remember { mutableStateOf(appSettings.username) }
-    var password by remember { mutableStateOf(appSettings.password) }
+    var serverUrl by rememberSaveable { mutableStateOf(appSettings.serverUrl) }
+    var username by rememberSaveable { mutableStateOf(appSettings.username) }
+    var password by rememberSaveable { mutableStateOf(appSettings.password) }
 
     val uiState by viewModel.uiState.collectAsState()
 

@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,6 +47,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import io.github.amanbutnot.moosic.common.appSettings
 import io.github.amanbutnot.moosic.getPlatform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -94,10 +96,15 @@ fun SettingsContent() {
                 .verticalScroll(rememberScrollState())
                 .padding(vertical = 8.dp)
         ) {
+            val serverDesc = if (appSettings.serverUrl.isNotBlank()) {
+                "${appSettings.username} @ ${appSettings.serverUrl}"
+            } else {
+                "Change Server URL and/or current user"
+            }
             SettingsItem(
                 heading = "Change Server/User",
-                description = "Change Server URL and/or current user",
-                icon = Icons.Default.AccountCircle,
+                description = serverDesc,
+                icon = Icons.Default.Settings,
                 onClick = { navigator?.push(ServerConfigScreen) }
             )
             SettingsItem(
@@ -128,7 +135,7 @@ fun SettingsContent() {
                 heading = "Account info",
                 description = "View Information about your account",
                 icon = Icons.Default.Lock,
-                onClick = { }
+                onClick = { navigator?.push(UserInfoScreen) }
             )
             SettingsItem(
                 heading = "Notifications",
@@ -218,7 +225,9 @@ fun SettingsItem(
                 Text(
                     text = description,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
