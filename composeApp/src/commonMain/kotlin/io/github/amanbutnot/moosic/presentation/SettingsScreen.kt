@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -38,23 +40,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import io.github.amanbutnot.moosic.getPlatform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object SettingsScreen : Screen {
     @Composable
     override fun Content() {
-        showSettings()
+        SettingsContent()
     }
 }
 
 @Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun showSettings() {
+fun SettingsContent() {
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     val navigator = LocalNavigator.current
@@ -89,60 +94,82 @@ fun showSettings() {
                 .verticalScroll(rememberScrollState())
                 .padding(vertical = 8.dp)
         ) {
-            settingOption(
+            SettingsItem(
                 heading = "Change Server/User",
                 description = "Change Server URL and/or current user",
                 icon = Icons.Default.AccountCircle,
-                onClick = { }
+                onClick = { navigator?.push(ServerConfigScreen) }
             )
-            settingOption(
+            SettingsItem(
                 heading = "Audio Quality",
                 description = "Configure streaming and download quality",
                 icon = Icons.Default.Audiotrack,
                 onClick = { }
             )
-            settingOption(
+            SettingsItem(
                 heading = "Appearance",
                 description = "Dark mode and accent colors",
                 icon = Icons.Default.Palette,
                 onClick = { }
             )
-            settingOption(
+            SettingsItem(
                 heading = "Downloads",
                 description = "Manage downloaded music and storage",
                 icon = Icons.Default.Download,
                 onClick = { }
             )
-            settingOption(
+            SettingsItem(
                 heading = "Playback",
                 description = "Equalizer and gapless playback",
                 icon = Icons.Default.PlayArrow,
                 onClick = { }
             )
-            settingOption(
-                heading = "Privacy",
-                description = "Manage your data and visibility",
+            SettingsItem(
+                heading = "Account info",
+                description = "View Information about your account",
                 icon = Icons.Default.Lock,
                 onClick = { }
             )
-            settingOption(
+            SettingsItem(
                 heading = "Notifications",
                 description = "Configure alerts and updates",
                 icon = Icons.Default.Notifications,
                 onClick = { }
             )
-            settingOption(
+            SettingsItem(
                 heading = "About Moosic",
                 description = "Version information and licenses",
                 icon = Icons.Default.Info,
                 onClick = { }
             )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Moosic",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Version 1.0.0 (${getPlatform().name})",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
 
 @Composable
-fun settingOption(
+fun SettingsItem(
     heading: String,
     description: String,
     icon: ImageVector,

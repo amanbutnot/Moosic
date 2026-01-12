@@ -70,6 +70,8 @@ kotlin {
             implementation(libs.coil.compose)
             //Ktor
             implementation(libs.bundles.ktor)
+            //saved prefs
+            implementation(libs.multiplatform.settings)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
