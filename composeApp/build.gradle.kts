@@ -67,8 +67,6 @@ kotlin {
             implementation(libs.voyager.transitions)
             //Coil
             implementation(libs.coil.compose)
-            //Icons
-            implementation("androidx.compose.material:material-icons-extended")
             //Ktor
             implementation(libs.bundles.ktor)
         }
