@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -44,6 +45,8 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.coil.network.okhttp)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -54,13 +57,31 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            //Shared Prefs
+            implementation(libs.multiplatform.settings.no.arg)
+            //Voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.bottomSheetNavigator)
+            implementation(libs.voyager.tabNavigator)
+            implementation(libs.voyager.transitions)
+            //Coil
+            implementation(libs.coil.compose)
+            //Icons
+            implementation("androidx.compose.material:material-icons-extended")
+            //Ktor
+            implementation(libs.bundles.ktor)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.coil.network.okhttp)
         }
     }
 }
