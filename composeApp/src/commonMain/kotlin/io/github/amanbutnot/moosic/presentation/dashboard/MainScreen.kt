@@ -15,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconButtonShapes
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -36,7 +37,6 @@ object MainScreen : Screen {
     @Composable
     override fun Content() {
         val nav = LocalNavigator.current
-        val Cookie7Sided: RoundedPolygon = RoundedPolygon(7, radius = 3f)
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
@@ -48,7 +48,7 @@ object MainScreen : Screen {
                     actions = {
                         FilledTonalIconButton(
                             onClick = { nav?.push(SettingsScreen) },
-                            shapes = IconButtonDefaults.shapes(RectangleShape),
+                            shapes = IconButtonDefaults.shapes(MaterialShapes.Ghostish.toShape()),
                             content = {
                                 Icon(Icons.Default.Settings, Icons.Default.Settings.name)
                             }
