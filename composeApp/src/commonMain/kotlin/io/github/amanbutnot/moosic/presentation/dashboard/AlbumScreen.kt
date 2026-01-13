@@ -74,9 +74,12 @@ object AlbumScreen : Screen {
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 @Preview
-private fun AlbumTab() {
+fun AlbumTab(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        modifier = modifier
+            .fillMaxSize()
+            .padding()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         val options = listOf("Songs", "Albums", "Artist", "Playlist", "Folder", "Liked")
         val viewModel: AlbumListViewModel = viewModel { AlbumListViewModel(size = 100) }
