@@ -30,7 +30,7 @@ class AlbumListViewModel() : ViewModel() {
                 val albumResponse = getAlbumList()
                 _state.value = DataState(
                     success = true,
-                    loading = true,
+                    loading = false,
                     data = albumResponse,
                     message = "Album List Fetched Successfully"
                 )

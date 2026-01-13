@@ -6,6 +6,7 @@ import io.github.amanbutnot.moosic.data.model.AlbumListResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.statement.bodyAsText
 
 
 suspend fun getAlbumList(
@@ -28,6 +29,7 @@ suspend fun getAlbumList(
             parameter("f", "json")
             parameter("offset", offset)
         }
+        println(response.bodyAsText())
         response.body<AlbumListResponse>()
     } catch (e: Exception) {
         null
