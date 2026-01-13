@@ -2,7 +2,7 @@ package io.github.amanbutnot.moosic.network
 
 import io.github.amanbutnot.moosic.common.appSettings
 import io.github.amanbutnot.moosic.common.httpClient
-import io.github.amanbutnot.moosic.data.model.AlbumResponse
+import io.github.amanbutnot.moosic.data.model.AlbumListResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -12,7 +12,7 @@ suspend fun getAlbumList(
     sort: String = "newest",
     size: Int = 10,
     offset: Int = 0
-): AlbumResponse? {
+): AlbumListResponse? {
     val baseUrl = appSettings.serverUrl
     val url =
         if (baseUrl.endsWith("/")) "${baseUrl}rest/getAlbumList.view" else "${baseUrl}/rest/getAlbumList.view"
@@ -28,7 +28,7 @@ suspend fun getAlbumList(
             parameter("f", "json")
             parameter("offset", offset)
         }
-        response.body<AlbumResponse>()
+        response.body<AlbumListResponse>()
     } catch (e: Exception) {
         null
     }

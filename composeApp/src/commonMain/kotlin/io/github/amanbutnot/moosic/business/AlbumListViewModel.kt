@@ -4,20 +4,24 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.amanbutnot.moosic.data.model.AlbumResponse
+import io.github.amanbutnot.moosic.data.model.AlbumListResponse
 import io.github.amanbutnot.moosic.network.getAlbumList
 import kotlinx.coroutines.launch
 
-class AlbumViewModel() : ViewModel() {
+class AlbumListViewModel() : ViewModel() {
     private val _state = mutableStateOf(DataState())
     val state: MutableState<DataState> = _state
 
     data class DataState(
         val success: Boolean = false,
         val loading: Boolean = false,
-        val data: AlbumResponse? = null,
+        val data: AlbumListResponse? = null,
         val message: String? = null,
     )
+
+    init {
+        getDataState()
+    }
 
     fun getDataState() {
         viewModelScope.launch {
