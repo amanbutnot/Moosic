@@ -56,7 +56,7 @@ object ServerConfigScreen : Screen {
     }
 }
 
-@Preview(showBackground = true)
+@Preview()
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ServerConfigContent(
