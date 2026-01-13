@@ -1,10 +1,12 @@
 package io.github.amanbutnot.moosic.data.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserInfoModel(
-    val `subsonic-response`: SubsonicResponse1
+    @SerialName("`subsonic-response`")
+    val subsonicResponse1: SubsonicResponse1
 )
 
 @Serializable

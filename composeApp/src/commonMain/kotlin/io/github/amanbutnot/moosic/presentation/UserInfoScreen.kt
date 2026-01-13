@@ -34,7 +34,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -132,7 +131,7 @@ fun UserInfoList(userInfo: UserInfoModel) {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        UserInfoHeader(userInfo.`subsonic-response`.user.username)
+        UserInfoHeader(userInfo.subsonicResponse1.user.username)
         Spacer(modifier = Modifier.height(24.dp))
         
         Text(
@@ -143,19 +142,19 @@ fun UserInfoList(userInfo: UserInfoModel) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        RoleItem("Scrobbling", userInfo.`subsonic-response`.user.scrobblingEnabled)
-        RoleItem("Admin", userInfo.`subsonic-response`.user.adminRole)
-        RoleItem("Settings", userInfo.`subsonic-response`.user.settingsRole)
-        RoleItem("Download", userInfo.`subsonic-response`.user.downloadRole)
-        RoleItem("Upload", userInfo.`subsonic-response`.user.uploadRole)
-        RoleItem("Playlist", userInfo.`subsonic-response`.user.playlistRole)
-        RoleItem("Cover Art", userInfo.`subsonic-response`.user.coverArtRole)
-        RoleItem("Comment", userInfo.`subsonic-response`.user.commentRole)
-        RoleItem("Podcast", userInfo.`subsonic-response`.user.podcastRole)
-        RoleItem("Stream", userInfo.`subsonic-response`.user.streamRole)
-        RoleItem("Jukebox", userInfo.`subsonic-response`.user.jukeboxRole)
-        RoleItem("Share", userInfo.`subsonic-response`.user.shareRole)
-        RoleItem("Video Conversion", userInfo.`subsonic-response`.user.videoConversionRole)
+        RoleItem("Scrobbling", userInfo.subsonicResponse1.user.scrobblingEnabled)
+        RoleItem("Admin", userInfo.subsonicResponse1.user.adminRole)
+        RoleItem("Settings", userInfo.subsonicResponse1.user.settingsRole)
+        RoleItem("Download", userInfo.subsonicResponse1.user.downloadRole)
+        RoleItem("Upload", userInfo.subsonicResponse1.user.uploadRole)
+        RoleItem("Playlist", userInfo.subsonicResponse1.user.playlistRole)
+        RoleItem("Cover Art", userInfo.subsonicResponse1.user.coverArtRole)
+        RoleItem("Comment", userInfo.subsonicResponse1.user.commentRole)
+        RoleItem("Podcast", userInfo.subsonicResponse1.user.podcastRole)
+        RoleItem("Stream", userInfo.subsonicResponse1.user.streamRole)
+        RoleItem("Jukebox", userInfo.subsonicResponse1.user.jukeboxRole)
+        RoleItem("Share", userInfo.subsonicResponse1.user.shareRole)
+        RoleItem("Video Conversion", userInfo.subsonicResponse1.user.videoConversionRole)
     }
 }
 
