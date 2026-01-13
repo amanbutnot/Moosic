@@ -49,7 +49,6 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -71,10 +70,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.lerp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -95,18 +94,20 @@ object SettingsScreen : Screen {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SettingsContent() {
+    val type = MaterialTheme.typography
+    val color = MaterialTheme.colorScheme
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
             rememberTopAppBarState(),
             snapAnimationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessMedium
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessHigh
             )
         )
     val fraction = scrollBehavior.state.collapsedFraction
     val titleSize = lerp(
-        start = 28.sp,
-        stop = 18.sp,
+        start = type.titleLargeEmphasized.copy(fontSize = 80.sp),
+        stop = type.titleSmall,
         fraction = fraction
     )
     val navigator = LocalNavigator.current
@@ -121,19 +122,15 @@ fun SettingsContent() {
                     }
                 },
                 title = {
-                    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 50.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             modifier = Modifier,
                             text = "Settings",
                             maxLines = 1,
-                            fontSize = titleSize,
+                            style = titleSize,
                             overflow = TextOverflow.Ellipsis
                         )
-                        Spacer(Modifier.height(8.dp))
-                        LinearWavyProgressIndicator(
-                            modifier = Modifier.fillMaxWidth(),
-                            amplitude = 0.4f, wavelength = 80.dp, waveSpeed = 20.dp
-                        )
+
                     }
                 },
 
@@ -329,12 +326,6 @@ fun old() {
     }
 }
 
-object a : Screen {
-    @Composable
-    override fun Content() {
-
-    }
-}
 
 @Composable
 fun SettingsItem(
