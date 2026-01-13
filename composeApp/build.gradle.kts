@@ -72,6 +72,8 @@ kotlin {
             implementation(libs.bundles.ktor)
             //saved prefs
             implementation(libs.multiplatform.settings)
+            //date time
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

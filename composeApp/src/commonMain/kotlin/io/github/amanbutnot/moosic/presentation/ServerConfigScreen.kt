@@ -10,20 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -37,9 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.screen.Screen
@@ -47,6 +35,8 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import io.github.amanbutnot.moosic.business.PingUiState
 import io.github.amanbutnot.moosic.business.PingViewModel
 import io.github.amanbutnot.moosic.common.appSettings
+import io.github.amanbutnot.moosic.presentation.common.MTextField
+import io.github.amanbutnot.moosic.presentation.common.MoosicScaffold
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 object ServerConfigScreen : Screen {
@@ -88,25 +78,11 @@ fun ServerConfigContent(
         }
     }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
-                title = {
-                    Text(
-                        "Server Configuration",
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navigator?.pop() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                scrollBehavior = scrollBehavior
-            )
-        },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+    MoosicScaffold(
+        title = "Server Configuration",
+        onBackClick = { navigator?.pop() },
+        snackbarHostState = snackbarHostState,
+        scrollBehavior = scrollBehavior
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -118,40 +94,31 @@ fun ServerConfigContent(
         ) {
             Spacer(modifier = Modifier.height(72.dp))
 
-            OutlinedTextField(
+            MTextField(
                 value = serverUrl,
                 onValueChange = { serverUrl = it },
-                label = { Text("Server URL") },
-                placeholder = { Text("https://your-server.com") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                shape = RoundedCornerShape(16.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
-                enabled = uiState !is PingUiState.Loading
+                placeholder = "https://server-url.in",
+                isPassword = false,
+                isNumber = false,
+                label = "Server Url"
             )
 
-            OutlinedTextField(
+            MTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                shape = RoundedCornerShape(16.dp),
-                placeholder = { Text("John-Doe") },
-                enabled = uiState !is PingUiState.Loading
+                placeholder = "Enter your username",
+                isPassword = false,
+                isNumber = false,
+                label = "Username"
             )
 
-            OutlinedTextField(
+            MTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                shape = RoundedCornerShape(16.dp),
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                placeholder = { Text("*********") },
-                enabled = uiState !is PingUiState.Loading
+                placeholder = "Password",
+                isPassword = true,
+                isNumber = false,
+                label = "Password"
             )
 
             Spacer(modifier = Modifier.height(24.dp))
