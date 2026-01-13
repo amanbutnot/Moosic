@@ -140,9 +140,7 @@ fun AlbumTab(modifier: Modifier = Modifier) {
         }
 
         if (state.loading) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                LoadingIndicator()
-            }
+            LoadingScreen()
         } else if (!state.success || state.data == null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(state.message ?: "Error Occurred")
@@ -170,6 +168,14 @@ fun AlbumTab(modifier: Modifier = Modifier) {
         }
 
 
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+fun LoadingScreen() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        LoadingIndicator()
     }
 }
 
