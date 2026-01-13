@@ -1,76 +1,62 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
+# Moosic
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Moosic is a modern, expressive music client built with **Compose Multiplatform** and **Kotlin Multiplatform (KMP)**. It aims to provide a beautiful and consistent music experience across Android, iOS, Desktop, and Web.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Features
 
-### Build and Run Android Application
+- **Multiplatform Support:** Shared business logic and UI across Android, iOS, JVM (Desktop), and Wasm/JS (Web).
+- **Material 3 Expressive UI:** Leverages the latest Material 3 design principles for a modern, fluid, and personalized look and feel.
+- **Subsonic/OpenSubsonic Integration:** Connects to your favorite music server (like Navidrome, Gonic, etc.) to stream your library.
+- **Responsive Design:** Adapts seamlessly to different screen sizes and orientations.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## Tech Stack
 
-### Build and Run Desktop (JVM) Application
+- **Framework:** [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform)
+- **Language:** [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+- **Navigation:** [Voyager](https://github.com/adrielcafe/voyager)
+- **Networking:** [Ktor](https://ktor.io/)
+- **Image Loading:** [Coil3](https://github.com/coil-kt/coil)
+- **Dependency Injection:** [Koin](https://insert-koin.io/) (Planned/In-use)
+- **Serialization:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+## Project Structure
 
-### Build and Run Web Application
+- `composeApp/commonMain`: Shared UI (Compose) and business logic.
+- `composeApp/androidMain`: Android-specific implementations and configuration.
+- `composeApp/iosMain`: iOS-specific implementations.
+- `composeApp/jvmMain`: Desktop-specific implementations.
+- `composeApp/wasmJsMain` / `jsMain`: Web-specific implementations.
+- `iosApp`: Entry point for the iOS application.
 
-To build and run the development version of the web app, use the run configuration from the run widget
-in your IDE's toolbar or run it directly from the terminal:
-- for the Wasm target (faster, modern browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-- for the JS target (slower, supports older browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:jsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:jsBrowserDevelopmentRun
-    ```
+## Getting Started
 
-### Build and Run iOS Application
+### Prerequisites
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+- Android Studio / IntelliJ IDEA
+- Kotlin Multiplatform Mobile plugin
+- Xcode (for iOS development)
+- JDK 17 or higher
 
----
+### Build and Run
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+#### Android
+```shell
+./gradlew :composeApp:assembleDebug
+```
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+#### Desktop (JVM)
+```shell
+./gradlew :composeApp:run
+```
+
+#### Web (Wasm)
+```shell
+./gradlew :composeApp:wasmJsBrowserDevelopmentRun
+```
+
+#### iOS
+Open the `iosApp` directory in Xcode or use the run configuration in Android Studio.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
