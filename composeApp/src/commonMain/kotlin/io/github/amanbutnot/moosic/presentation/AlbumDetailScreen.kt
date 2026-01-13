@@ -164,6 +164,7 @@ data class AlbumDetailScreen(val id: String) : Screen {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 // Artist name
+                // TODO: Add onclick to navigate to Artist page 
                 Text(
                     text = artist,
                     style = MaterialTheme.typography.headlineSmall.copy(
