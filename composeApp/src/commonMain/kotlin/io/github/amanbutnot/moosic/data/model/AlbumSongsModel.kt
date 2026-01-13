@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AlbumResponse(
+data class AlbumSongsResponse(
     @SerialName("subsonic-response")
     val subsonicResponse: AlbumSubsonicResponse
 )
