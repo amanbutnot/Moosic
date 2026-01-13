@@ -91,7 +91,7 @@ private fun AlbumTab() {
         modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
     ) {
         val options = listOf("Songs", "Albums", "Artist", "Playlist", "Folder", "Liked")
-        val viewModel: AlbumListViewModel = viewModel { AlbumListViewModel() }
+        val viewModel: AlbumListViewModel = viewModel { AlbumListViewModel(size = 100) }
         val state by viewModel.state
 
         val unCheckedIcons = listOf(

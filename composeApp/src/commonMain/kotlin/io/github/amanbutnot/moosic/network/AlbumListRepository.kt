@@ -10,9 +10,9 @@ import io.ktor.client.statement.bodyAsText
 
 
 suspend fun getAlbumList(
-    sort: String = "newest",
-    size: Int = 10,
-    offset: Int = 0
+    sort: String,
+    size: Int,
+    offset: Int
 ): AlbumListResponse? {
     val baseUrl = appSettings.serverUrl
     val url =

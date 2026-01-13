@@ -8,7 +8,11 @@ import io.github.amanbutnot.moosic.data.model.AlbumListResponse
 import io.github.amanbutnot.moosic.network.getAlbumList
 import kotlinx.coroutines.launch
 
-class AlbumListViewModel() : ViewModel() {
+class AlbumListViewModel(
+    sort: String = "newest",
+    size: Int = 10,
+    offset: Int = 0
+) : ViewModel() {
     private val _state = mutableStateOf(DataState())
     val state: MutableState<DataState> = _state
 
@@ -20,22 +24,26 @@ class AlbumListViewModel() : ViewModel() {
     )
 
     init {
-        getDataState()
+        getDataState(sort, size, offset)
     }
 
-    fun getDataState() {
+    fun getDataState(
+        sort: String,
+        size: Int,
+        offset: Int
+    ) {
         viewModelScope.launch {
-            _state.value = DataState(loading =true )
+            _state.value = DataState(loading = true)
             try {
-                val albumResponse = getAlbumList()
+                val albumResponse = getAlbumList(sort, size, offset)
                 _state.value = DataState(
                     success = true,
                     loading = false,
                     data = albumResponse,
                     message = "Album List Fetched Successfully"
                 )
-            }catch (e: Exception){
-                _state.value= DataState(
+            } catch (e: Exception) {
+                _state.value = DataState(
                     loading = false,
                     success = false,
                     data = null,
