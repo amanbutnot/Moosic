@@ -8,12 +8,18 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 
+/**
+ * Fetches the list of songs for a specific album from the Subsonic server.
+ *
+ * @param id The unique identifier of the album.
+ * @return An [AlbumSongsResponse] containing the album songs if successful, or null if an error occurs.
+ */
 suspend fun getAlbumSongs(
-    id:String
+    id: String
 ): AlbumSongsResponse? {
     val baseUrl = appSettings.serverUrl
     val url =
-        if (baseUrl.endsWith("/")) "${baseUrl}rest/getAlbumList.view" else "${baseUrl}/rest/getAlbumList.view"
+        if (baseUrl.endsWith("/")) "${baseUrl}rest/getAlbum.view" else "${baseUrl}/rest/getAlbum.view"
 
     return try {
         val response = httpClient.get(url) {
