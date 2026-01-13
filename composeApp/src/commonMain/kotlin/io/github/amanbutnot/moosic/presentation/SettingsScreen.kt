@@ -22,7 +22,6 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -37,6 +36,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
@@ -44,7 +44,9 @@ import androidx.compose.ui.text.lerp
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
+import androidx.graphics.shapes.star
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -134,17 +136,22 @@ fun SettingsContent() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(settingsOptions) { settingsOption ->
-                val Fan = RoundedPolygon(3)
+                val Fan = RoundedPolygon.star(
+                    innerRadius = 0.8f,
+                    numVerticesPerRadius = 4,
+                    rounding = CornerRounding(0.15f),
+                    innerRounding = CornerRounding(0.15f)
+                )
 
                 ElevatedCard(
                     onClick = settingsOption.onClick,
                     modifier = Modifier.fillMaxWidth(),
-                    shape = Fan.toShape() ,
+                    shape = Fan.toShape(),
                     colors = CardDefaults.elevatedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainer
+                        containerColor = Color.White
                     ),
 
-                ) {
+                    ) {
                     Column(
                         modifier = Modifier
                             .padding(20.dp)
