@@ -1,6 +1,5 @@
 package io.github.amanbutnot.moosic.presentation.dashboard
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -44,34 +43,23 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Canvas
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.ImageBitmapConfig
-import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.screen.Screen
-import com.kmpalette.rememberDominantColorState
+import coil3.compose.AsyncImage
 import io.github.amanbutnot.moosic.business.AlbumListViewModel
+import io.github.amanbutnot.moosic.data.constants.getImage
 import io.github.amanbutnot.moosic.data.model.AlbumModel
-import moosic.composeapp.generated.resources.Res
-import moosic.composeapp.generated.resources.compose_multiplatform
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
@@ -179,22 +167,18 @@ private fun AlbumTab() {
 private fun AlbumCard(model: AlbumModel) {
     Column(
         modifier = Modifier.fillMaxWidth()
-    ) {
-        val dominantColorState = rememberDominantColorState()
-        val pain: Painter = painterResource(Res.drawable.compose_multiplatform)
-        LaunchedEffect(Res.drawable.compose_multiplatform) {
-            dominantColorState.updateFrom(painterToImageBitmap(pain, size = IntSize(200, 200)))
-        }
+    )
+    {
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f),
+                .aspectRatio(1f).shadow(elevation = 8.dp),
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-            colors = CardDefaults.cardColors(containerColor = dominantColorState.color.copy(alpha = 0.6f))
         ) {
-            Image(
-                painter = painterResource(Res.drawable.compose_multiplatform),
+            AsyncImage(
+                model = getImage(model.id),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -219,33 +203,4 @@ private fun AlbumCard(model: AlbumModel) {
             modifier = Modifier.padding(horizontal = 4.dp)
         )
     }
-}
-
-
-fun painterToImageBitmap(
-    painter: Painter,
-    size: IntSize,
-    density: Density = Density(1f)
-): ImageBitmap {
-    val imageBitmap = ImageBitmap(
-        width = size.width,
-        height = size.height,
-        config = ImageBitmapConfig.Argb8888
-    )
-
-    val canvas = Canvas(imageBitmap)
-    val drawScope = CanvasDrawScope()
-
-    drawScope.draw(
-        density = density,
-        layoutDirection = LayoutDirection.Ltr,
-        canvas = canvas,
-        size = Size(size.width.toFloat(), size.height.toFloat())
-    ) {
-        with(painter) {
-            draw(size = this@draw.size)
-        }
-    }
-
-    return imageBitmap
 }

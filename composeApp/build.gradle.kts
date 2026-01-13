@@ -75,7 +75,6 @@ kotlin {
             //date time
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
             //color from image
-            implementation(libs.kmpalette.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -1,5 +1,8 @@
 package io.github.amanbutnot.moosic.data.constants
 
-fun getImage(id:String): String{
-val coverArtUrl = "https://music.hoelab.org/rest/getCoverArt.view?u=test&p=narayan7&v=1.16.1&c=feagegsag&f=json&id=1RsPD3I1gPmyloBgAOiSxe"
+import io.github.amanbutnot.moosic.common.appSettings
+
+fun getImage(id: String): String {
+    val baseUrl = appSettings.serverUrl
+    return if (baseUrl.endsWith("/")) "${baseUrl}rest/getCoverArt.view?u=${appSettings.username}&p=${appSettings.password}&v=1.16.1&c=feagegsag&f=json&id=$id" else "${baseUrl}/rest/getCoverArt.view?u=${appSettings.username}&p=${appSettings.password}&v=1.16.1&c=feagegsag&f=json&id=$id"
 }
