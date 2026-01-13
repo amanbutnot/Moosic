@@ -37,8 +37,6 @@ data class Album(
     val isCompilation: Boolean,
     val sortName: String,
     val discTitles: List<String>,
-    val originalReleaseDate: OriginalReleaseDate,
-    val releaseDate: ReleaseDate,
     val releaseTypes: List<String>,
     val recordLabels: List<RecordLabel>,
     val moods: List<String>,
@@ -46,7 +44,7 @@ data class Album(
     val displayArtist: String,
     val explicitStatus: String,
     val version: String,
-    val song: Song
+    val song: List<Song>
 )
 
 @Serializable
@@ -106,11 +104,6 @@ data class Genre(
 
 @Serializable
 data class OriginalReleaseDate(
-    val changeMe: String
-)
-
-@Serializable
-data class ReleaseDate(
     val changeMe: String
 )
 

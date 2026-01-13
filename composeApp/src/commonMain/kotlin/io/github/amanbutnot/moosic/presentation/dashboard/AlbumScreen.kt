@@ -1,6 +1,7 @@
 package io.github.amanbutnot.moosic.presentation.dashboard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,10 +57,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import io.github.amanbutnot.moosic.business.AlbumListViewModel
 import io.github.amanbutnot.moosic.data.constants.getImage
 import io.github.amanbutnot.moosic.data.model.AlbumModel
+import io.github.amanbutnot.moosic.presentation.AlbumDetailScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
@@ -75,6 +79,7 @@ object AlbumScreen : Screen {
 @Composable
 @Preview
 fun AlbumTab(modifier: Modifier = Modifier) {
+    val nav = LocalNavigator.currentOrThrow
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -156,7 +161,9 @@ fun AlbumTab(modifier: Modifier = Modifier) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(state.data!!.subsonicResponse.albumList.album) {
-                        AlbumCard(it)
+                        AlbumCard(it){
+                          nav.push(AlbumDetailScreen(it.id))
+                        }
                     }
                 }
             }
@@ -167,9 +174,9 @@ fun AlbumTab(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun AlbumCard(model: AlbumModel) {
+private fun AlbumCard(model: AlbumModel, onClick: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().clickable { onClick() }
     )
     {
 
