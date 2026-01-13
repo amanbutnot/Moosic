@@ -77,7 +77,8 @@ fun SettingsContent() {
                 },
                 title = {
                     Text(
-                        "Settings",
+                        modifier= Modifier.padding(vertical = 50.dp),
+                        text="Settings",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

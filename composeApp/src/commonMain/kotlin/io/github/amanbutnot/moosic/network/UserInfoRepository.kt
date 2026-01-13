@@ -6,10 +6,10 @@ import io.github.amanbutnot.moosic.data.model.UserInfoModel
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.statement.bodyAsText
 
 class UserInfoRepository {
-    suspend fun getUserInfo(
-    ): UserInfoModel? {
+    suspend fun getUserInfo(): UserInfoModel? {
         val baseUrl = appSettings.serverUrl
         val url = if (baseUrl.endsWith("/")) "${baseUrl}rest/getUser.view" else "${baseUrl}/rest/getUser.view"
         
@@ -22,8 +22,10 @@ class UserInfoRepository {
                 parameter("v", "1.16.1")
                 parameter("c", "myapp")
             }
+            println(response.bodyAsText())
             response.body<UserInfoModel>()
         } catch (e: Exception) {
+            println(e.message)
             null
         }
     }
