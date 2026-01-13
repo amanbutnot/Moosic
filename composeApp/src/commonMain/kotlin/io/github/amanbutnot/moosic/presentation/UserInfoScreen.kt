@@ -132,7 +132,7 @@ fun UserInfoList(userInfo: UserInfoModel) {
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        UserInfoHeader(userInfo.username)
+        UserInfoHeader(userInfo.`subsonic-response`.user.username)
         Spacer(modifier = Modifier.height(24.dp))
         
         Text(
@@ -143,19 +143,19 @@ fun UserInfoList(userInfo: UserInfoModel) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        RoleItem("Scrobbling", userInfo.scrobblingEnabled)
-        RoleItem("Admin", userInfo.adminRole)
-        RoleItem("Settings", userInfo.settingsRole)
-        RoleItem("Download", userInfo.downloadRole)
-        RoleItem("Upload", userInfo.uploadRole)
-        RoleItem("Playlist", userInfo.playlistRole)
-        RoleItem("Cover Art", userInfo.coverArtRole)
-        RoleItem("Comment", userInfo.commentRole)
-        RoleItem("Podcast", userInfo.podcastRole)
-        RoleItem("Stream", userInfo.streamRole)
-        RoleItem("Jukebox", userInfo.jukeboxRole)
-        RoleItem("Share", userInfo.shareRole)
-        RoleItem("Video Conversion", userInfo.videoConversionRole)
+        RoleItem("Scrobbling", userInfo.`subsonic-response`.user.scrobblingEnabled)
+        RoleItem("Admin", userInfo.`subsonic-response`.user.adminRole)
+        RoleItem("Settings", userInfo.`subsonic-response`.user.settingsRole)
+        RoleItem("Download", userInfo.`subsonic-response`.user.downloadRole)
+        RoleItem("Upload", userInfo.`subsonic-response`.user.uploadRole)
+        RoleItem("Playlist", userInfo.`subsonic-response`.user.playlistRole)
+        RoleItem("Cover Art", userInfo.`subsonic-response`.user.coverArtRole)
+        RoleItem("Comment", userInfo.`subsonic-response`.user.commentRole)
+        RoleItem("Podcast", userInfo.`subsonic-response`.user.podcastRole)
+        RoleItem("Stream", userInfo.`subsonic-response`.user.streamRole)
+        RoleItem("Jukebox", userInfo.`subsonic-response`.user.jukeboxRole)
+        RoleItem("Share", userInfo.`subsonic-response`.user.shareRole)
+        RoleItem("Video Conversion", userInfo.`subsonic-response`.user.videoConversionRole)
     }
 }
 

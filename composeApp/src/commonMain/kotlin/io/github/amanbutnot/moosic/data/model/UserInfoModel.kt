@@ -4,6 +4,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserInfoModel(
+    val `subsonic-response`: SubsonicResponse1
+)
+
+@Serializable
+data class SubsonicResponse1(
+    val status: String,
+    val version: String,
+    val type: String,
+    val serverVersion: String,
+    val openSubsonic: Boolean,
+    val user: User
+)
+
+@Serializable
+data class User(
     val username: String,
     val scrobblingEnabled: Boolean,
     val adminRole: Boolean,
