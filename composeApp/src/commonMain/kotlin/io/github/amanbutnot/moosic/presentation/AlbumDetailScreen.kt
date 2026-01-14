@@ -311,13 +311,14 @@ data class AlbumDetailScreen(val id: String) : Screen {
 
     @Composable
     private fun ExpressiveSongListItem(song: Song) {
+        val nav = LocalNavigator.currentOrThrow
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp),
             shape = RoundedCornerShape(20.dp),
             color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.5f),
-            onClick = { /* TODO: Play song */ }
+            onClick = { nav.push(SongPlayerScreen(song)) }
         ) {
             Row(
                 modifier = Modifier

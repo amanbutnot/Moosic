@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -24,20 +22,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import io.github.amanbutnot.moosic.common.SongPlayer2
+import io.github.amanbutnot.moosic.data.model.Song
 import moosic.composeapp.generated.resources.Res
 import moosic.composeapp.generated.resources.compose_multiplatform
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-object SongPlayerScreen : Screen {
+data class SongPlayerScreen(val song: Song) : Screen {
     @Composable
     override fun Content() {
+        val url1 =
+            "https://music.hoelab.org/rest/stream.view?u=test&p=narayan7&v=1.16.1&c=feagegsag&f=json&id=${song.id}"
+        SongScreenContent(url1)
     }
 }
 
@@ -45,12 +49,13 @@ object SongPlayerScreen : Screen {
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Preview
 @Composable
-private fun SongScreenContent() {
+private fun SongScreenContent(url: String) {
+    val player = remember { SongPlayer2(url) }
     Column(
         modifier = Modifier
             .fillMaxSize()
             //TODO: Take color from the cover from previous screen
-            .background(Color.Blue.copy(alpha = 0.2f))
+            .background(Color(0xffb4befe).copy(alpha = 0.2f))
             .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -63,17 +68,18 @@ private fun SongScreenContent() {
             Image(painterResource(Res.drawable.compose_multiplatform), contentDescription = "")
         }
         Text("Serafine", style = MaterialTheme.typography.displayLarge)
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             FilledTonalIconButton(
-                onClick = { },
+                onClick = {
+                    println("button click")
+                    player.play()
+                },
                 modifier = Modifier.height(80.dp).weight(1f)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "Add to favorites",
-                    modifier = Modifier.size(28.dp),
-                    tint = MaterialTheme.colorScheme.error
-                )
+                Text("PLAY", style = MaterialTheme.typography.displayMedium)
             }
             FilledTonalIconButton(
                 onClick = { },

@@ -15,7 +15,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     MoosicTheme {
         Surface {
-            Navigator(SongPlayerScreen)
+            Navigator(MainScreen)
         }
     }
 }
