@@ -1,8 +1,12 @@
 # Moosic
 
 ![Version](https://img.shields.io/badge/version-1.0-blue)
-![Kotlin](https://img.shields.io/badge/language-Kotlin-purple?logo=kotlin)
-![Swift](https://img.shields.io/badge/language-Swift-orange?logo=swift)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.3.0-purple?logo=kotlin)
+![Swift](https://img.shields.io/badge/Swift-5.10-orange?logo=swift)
+![Compose Multiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.9.0--alpha03-blue?logo=jetpackcompose)
+![Ktor](https://img.shields.io/badge/Ktor-3.3.3-orange?logo=ktor)
+![Voyager](https://img.shields.io/badge/Voyager-1.1.0--beta03-red)
+![Coil3](https://img.shields.io/badge/Coil3-3.3.0-green)
 
 Moosic is a modern, expressive music client built with **Compose Multiplatform** and **Kotlin Multiplatform (KMP)**. It aims to provide a beautiful and consistent music experience across Android, iOS, Desktop, and Web.
 
@@ -15,13 +19,13 @@ Moosic is a modern, expressive music client built with **Compose Multiplatform**
 
 ## Tech Stack
 
-- **Framework:** [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform)
-- **Language:** [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
-- **Navigation:** [Voyager](https://github.com/adrielcafe/voyager)
-- **Networking:** [Ktor](https://ktor.io/)
-- **Image Loading:** [Coil3](https://github.com/coil-kt/coil)
+- **Framework:** [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) (1.9.0-alpha03)
+- **Language:** [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html) (2.3.0)
+- **Navigation:** [Voyager](https://github.com/adrielcafe/voyager) (1.1.0-beta03)
+- **Networking:** [Ktor](https://ktor.io/) (3.3.3)
+- **Image Loading:** [Coil3](https://github.com/coil-kt/coil) (3.3.0)
 - **Dependency Injection:** [Koin](https://insert-koin.io/) (Planned/In-use)
-- **Serialization:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
+- **Serialization:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) (2.3.0)
 
 ## Project Structure
 
