@@ -1,5 +1,9 @@
 # Moosic
 
+![Version](https://img.shields.io/badge/version-1.0-blue)
+![Kotlin](https://img.shields.io/badge/language-Kotlin-purple?logo=kotlin)
+![Swift](https://img.shields.io/badge/language-Swift-orange?logo=swift)
+
 Moosic is a modern, expressive music client built with **Compose Multiplatform** and **Kotlin Multiplatform (KMP)**. It aims to provide a beautiful and consistent music experience across Android, iOS, Desktop, and Web.
 
 ## Features
