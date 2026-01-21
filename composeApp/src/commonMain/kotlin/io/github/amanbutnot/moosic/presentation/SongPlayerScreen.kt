@@ -55,6 +55,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import io.github.amanbutnot.moosic.common.rememberSongPlayer
 import io.github.amanbutnot.moosic.data.constants.getImage
+import io.github.amanbutnot.moosic.data.constants.getStreamUrl
 import io.github.amanbutnot.moosic.data.model.Song
 import kotlinx.coroutines.delay
 
@@ -62,7 +63,7 @@ data class SongPlayerScreen(val song: Song) : Screen {
     @Composable
     override fun Content() {
         val nav = LocalNavigator.currentOrThrow
-        val url = "https://music.hoelab.org/rest/stream.view?u=test&p=narayan7&v=1.16.1&c=feagegsag&f=json&id=${song.id}"
+        val url = getStreamUrl(song.id)
         
         Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
             // Background Image
